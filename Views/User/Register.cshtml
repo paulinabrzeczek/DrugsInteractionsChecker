@@ -1,0 +1,99 @@
+﻿@model InterakcjeMiedzyLekami.Models.User
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <style>
+        header {
+            margin-bottom: 10%;
+        }
+       
+        form {
+            background-color: #fff;
+            position: relative;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            height: 100%;
+            width: 90%;
+            max-width: 500px;
+            transition: transform 0.3s ease;
+            margin: auto;
+        }
+
+            form:hover {
+                transform: scale(1.02);
+                padding: 18px;
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background-color: #8fb5c9;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #7b9dbd;
+            }
+
+        .error-message {
+            margin-top: 10px;
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <form method="post" class="bg-light p-4 rounded">
+            <div class="form-group">
+                <label for="Username">Username:</label>
+                <input asp-for="Username" name="Username" id="Username" class="form-control" required />
+            </div>
+            <div class="form-group">
+                <label for="Email">E-mail:</label>
+                <input asp-for="Email" name="Email" id="Email" class="form-control" required />
+                <span asp-validation-for="Email" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label for="Passwordhash">Password:</label>
+                <input asp-for="Passwordhash" name="Passwordhash" type="password" id="Passwordhash" class="form-control" required />
+                <span asp-validation-for="Passwordhash" class="text-danger"></span>
+            </div>
+            <button type="submit" class="btn btn-primary">Zarejestruj</button>
+
+            @if (ViewBag.UsernameTaken == true)
+            {
+                <div class="error-message">
+                    Nazwa użytkownika jest już zajęta
+                </div>
+            }
+        </form>
+    </div>
+    <script src="~/js/addUser.js"></script>
+</body>
+</html>

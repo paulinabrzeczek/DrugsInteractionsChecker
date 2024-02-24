@@ -1,0 +1,19 @@
+﻿@model List<InterakcjeMiedzyLekami.ViewModels.UserReviewsVM>
+
+<h4>Opinie o leku </h4>
+
+<div class="row">
+
+    @foreach (var review in Model)
+    {
+        <div class="col-md-3">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <h5 class="card-title">@review.Review</h5>
+                    <p class="card-text">@review.CreationDate</p>
+                    <p class="card-text">@review.UserName</p>
+                </div>
+            </div>
+        </div>
+    }
+</div>

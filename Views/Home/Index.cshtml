@@ -1,0 +1,136 @@
+﻿@model List<InterakcjeMiedzyLekami.Models.Pharmaceutical>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        .header{
+            background-color: #8fb5c9; /* Delikatny pastelowy niebieski */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px; /* Zaokrąglenie rogów nagłówka */
+        }
+        header {
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .greeting {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #007bff;
+        }
+
+        .login-message {
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+
+        .warning {
+            font-size: 20px;
+            font-weight: bold;
+            color: #6c757d;
+            margin-bottom: 20px;
+        }
+
+        .add-button {
+            margin-bottom: 20px;
+        }
+
+        .card-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-around;
+        }
+
+        .card {
+            width: 100%;
+            max-width: 300px;
+            margin: 10px;
+            transition: box-shadow 0.3s ease; /* Dodana animacja podświetlenia */
+        }
+
+            .card:hover {
+                box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Efekt podświetlenia po najechaniu */
+            }
+
+        .card-body {
+            padding: 10px;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .card-text {
+            margin-bottom: 10px;
+            color: #495057;
+        }
+
+        .action-button {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1 class="header">Lekopedia</h1>
+
+    <p class="warning">
+        Przed użyciem zapoznaj się z treścią ulotki dołączonej do opakowania bądź skonsultuj się z lekarzem lub farmaceutą,
+        gdyż każdy lek niewłaściwie stosowany zagraża Twojemu życiu lub zdrowiu.
+    </p>
+
+    @if (User.IsInRole("Admin"))
+    {
+        <a asp-controller="Home" asp-action="Create" class="btn btn-outline-primary add-button">Dodaj</a>
+    }
+
+    <div class="card-container">
+        @foreach (var pharmaceutical in Model)
+        {
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">@pharmaceutical.NamePharmaceutical</h5>
+                    <p class="card-text">@pharmaceutical.Description</p>
+                    <p class="card-text">@pharmaceutical.Manufacturer</p>
+
+                    @if (User.Identity.IsAuthenticated)
+                    {
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <a asp-controller="Home" asp-action="Delete" asp-route-Id="@pharmaceutical.IdPharmaceutical" class="btn btn-outline-primary action-button">Usuń</a>
+                            <a asp-controller="Home" asp-action="Edit" asp-route-Id="@pharmaceutical.IdPharmaceutical" class="btn btn-outline-primary action-button">Edytuj</a>
+                        }
+                        <a asp-controller="Reviews" asp-action="AddReview" asp-route-Id="@pharmaceutical.IdPharmaceutical" class="btn btn-outline-primary action-button">Dodaj opinie</a>
+                    }
+                    <a asp-controller="Reviews" asp-action="GetReviews" asp-route-Id="@pharmaceutical.IdPharmaceutical" class="btn btn-outline-primary action-button">Opinie</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
+</html>

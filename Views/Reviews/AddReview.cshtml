@@ -1,0 +1,110 @@
+﻿@model InterakcjeMiedzyLekami.Models.PharmaceuticalsReview
+@{
+    ViewData["Title"] = "Dodaj Opinię";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dodaj Opinię</title>
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            height: 100vh;
+        }
+
+        .header {
+            background-color: #8fb5c9; /* Delikatny pastelowy niebieski */
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+            border-radius: 10px; /* Zaokrąglenie rogów nagłówka */
+        }
+
+        header {
+            color: #fff;
+            padding: 15px;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 400px;
+            transition: transform 0.3s ease;
+            margin: auto; /* Centrowanie formularza */
+        }
+
+            .form-container:hover {
+                transform: scale(1.02);
+                padding: 28px;
+            }
+
+        label {
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        textarea {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 12px;
+            background-color: #8fb5c9; /* Delikatny pastelowy niebieski */
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+            .btn-primary:hover {
+                background-color: #7b9dbd; /* Delikatny, nieco ciemniejszy odcień pastelowego niebieskiego */
+            }
+
+        p {
+            margin-top: 20px;
+            font-size: 14px;
+            color: #6c757d;
+        }
+    </style>
+</head>
+<body>
+
+        <h1 class="header">Dodaj Opinię o Leku</h1>
+        <!-- Dodaj inne elementy nagłówka, jeśli są potrzebne -->
+
+
+    <div class="form-container">
+        <form method="post" asp-action="AddReview" asp-controller="Reviews" class="bg-light p-4 rounded">
+            <div class="form-group">
+                <label for="reviewText">Dodaj opinię:</label>
+                <textarea class="form-control" id="reviewText" name="reviewText"></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Dodaj opinię</button>
+        </form>
+    </div>
+</body>
+</html>
